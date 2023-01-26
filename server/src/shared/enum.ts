@@ -5,4 +5,6 @@ export enum ErrorMessages {
   INVALID_EMAIL = "Invalid email",
   WEAK_PASSWORD = "A minimum 8 characters password contains a combination of uppercase and lowercase letter, number and symbol are required.",
   USED_EMAIL = "Email already in use",
+  NO_EMAIL_FOUND = "None user with this email found",
+  WRONG_PASSWORD = "Wrong password",
 }
