@@ -1,18 +1,21 @@
-import express, { Express, Request, Response } from "express";
+import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 
-import connectDB from "./db/connect";
-import { logger } from "./shared/logger";
+import connectDB from "./src/db/connect";
+import { logger } from "./src/shared/logger";
+import router from "./src/routes/user.routes";
 
 dotenv.config();
 
-const app: Express = express();
+const app = express();
+app.use(cors());
+app.use(express.json());
+
 const port = process.env.PORT;
 const databaseUrl = process.env.DATABASE_URL || "";
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
-});
+app.use('/api/user/', router);
 
 const start = async () => {
   try {
