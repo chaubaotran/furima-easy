@@ -7,4 +7,5 @@ export enum ErrorMessages {
   USED_EMAIL = "Email already in use",
   NO_EMAIL_FOUND = "None user with this email found",
   WRONG_PASSWORD = "Wrong password",
+  BAD_REQUEST = "Bad request",
 }

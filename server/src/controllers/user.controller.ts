@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { StatusCodes } from 'http-status-codes';
 
 import UserModel from "../models/User";
 import { ErrorMessages } from "../shared/enum";
@@ -11,15 +12,15 @@ export default class UserController {
       const userAlreadyExists = await UserModel.findOne({ email: user.email });
 
       if (userAlreadyExists) {
-        res.status(500).json({ email: ErrorMessages.USED_EMAIL });
+        res.status(StatusCodes.BAD_REQUEST).json({ email: ErrorMessages.USED_EMAIL });
         return;
       }
 
       const createdUser = await UserModel.create(user);
       
-      res.status(201).json(createdUser);
+      res.status(StatusCodes.CREATED).json(createdUser);
     } catch (error) {
-      res.status(500).send(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
   }
 }

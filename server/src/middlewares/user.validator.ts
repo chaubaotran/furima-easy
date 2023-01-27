@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
+import { StatusCodes } from "http-status-codes";
 import validator from "validator";
+
 import { ErrorMessages } from "../shared/enum";
 
 const userValidator = () => {
@@ -23,7 +25,7 @@ const userValidator = () => {
     }
 
     if (error.name || error.password || error.email) {
-      res.status(500).json(error);
+      res.status(StatusCodes.BAD_REQUEST).json(error);
       return;
     }
 
