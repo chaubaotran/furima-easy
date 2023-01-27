@@ -14,6 +14,7 @@ export const unhandledErrorsHandlingMiddleware = (
     logger.error(message);
 
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: message });
+    return;
   }
 
   next();
@@ -23,7 +24,7 @@ export const wrongUrlErrorHandlingMiddleware = (
   req: Request,
   res: Response
 ): void => {
-  const message = `Wrong URL Error: ${req.path} does not exist`;
+  const message = `Wrong URL Error: [${req.method}] ${req.path} does not exist`;
   logger.error(message);
 
   res.status(StatusCodes.NOT_FOUND).json({ error: message });

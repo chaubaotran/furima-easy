@@ -10,15 +10,18 @@ import {
   unhandledErrorsHandlingMiddleware,
   wrongUrlErrorHandlingMiddleware,
 } from "./src/middlewares/error-handling.middleware";
+import { authenticationMiddleware } from "./src/middlewares/auth.middleware";
+import { httpLoggingMiddleware } from "./src/middlewares/http-logging.middleware";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(httpLoggingMiddleware);
 app.use("/api/", authRouter);
+app.use(authenticationMiddleware);
 app.use("/api/user/", userRouter);
 app.all("*", wrongUrlErrorHandlingMiddleware);
-
 app.use(unhandledErrorsHandlingMiddleware);
 
 const start = async () => {
