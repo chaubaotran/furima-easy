@@ -3,8 +3,10 @@ import cors from "cors";
 
 import connectDB from "./src/db/connect";
 import { logger } from "./src/shared/logger";
-import authRouter from "./src/routes/auth.route";
+import authRouter from "./src/routes/auth.routes";
 import userRouter from "./src/routes/user.routes";
+import productRouter from "./src/routes/product.routes";
+import purchaseRouter from "./src/routes/purchase.routes";
 import config from "./src/config";
 import {
   unhandledErrorsHandlingMiddleware,
@@ -21,6 +23,8 @@ app.use(httpLoggingMiddleware);
 app.use("/api/", authRouter);
 app.use(authenticationMiddleware);
 app.use("/api/user/", userRouter);
+app.use("/api/product/", productRouter);
+app.use("/api/purchase/", purchaseRouter);
 app.all("*", wrongUrlErrorHandlingMiddleware);
 app.use(unhandledErrorsHandlingMiddleware);
 
